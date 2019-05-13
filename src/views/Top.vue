@@ -1,6 +1,7 @@
 <template>
     <div id="top">
         ここはトップページです
+        <div v-for="item in items">{{ item.ownerName }}</div>
     </div>
 </template>
 
@@ -8,7 +9,25 @@
 export default {
     name: 'top',
   data () {
-    return {}
+    return {
+        items: {
+            name1: {
+                itemName: "キノコ",
+                adress: "",
+                ownerName: "マリオ"
+            },
+            name2: {
+                itemName: "モンスターボール",
+                adress: "",
+                ownerName: "サトシ"
+            },
+            name3: {
+                itemName: "太刀",
+                adress: "",
+                ownerName: "ハンター"
+            },
+        }
+    }
   }
 }
 </script>
