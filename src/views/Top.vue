@@ -1,7 +1,8 @@
 <template>
     <div id="top">
-        ここはトップページです
-        <div v-for="item in items">{{ item.ownerName }}</div>
+        <div class="container">
+            <div v-for="item in items">{{ item.ownerName }}</div>
+        </div>
     </div>
 </template>
 
@@ -34,5 +35,15 @@ export default {
 
 <style lang="scss" scoped>
 
+#top {
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    background-color: #FAFAFA;
+}
 </style>
 
