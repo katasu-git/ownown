@@ -13,16 +13,16 @@ export default {
 </script>
 
 <style lang="scss">
-html, body {
+html, body, #app {
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* ↓ついでに文字詰めも指定 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
-}
-
-#app {
-  width: 100%;
-  height: 100%;
 }
 
 .fade-enter-active, .fade-leave-active {
