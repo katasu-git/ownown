@@ -1,21 +1,16 @@
 <template>
     <div id="top">
         <div class="wrapper">
-            <!-- <div class="container" v-for="item in items">
+            <div class="container" v-for="item in names">
                 <div class="iconContainer">
                     <div class="iconBackground"></div>
                 </div>
                 <div class="textContainer">
-                    <div class="textWrapper">名前: {{ item.itemName }}</div>
-                    <div class="textWrapper">アドレス: {{ item.adress }}</div>
-                    <div class="textWrapper">所有者: {{ item.ownerName }}</div>
+                    <div class="textWrapper">名前: {{ item[0] }}</div>
+                    <div class="textWrapper">アドレス: {{ item[2] }}</div>
+                    <div class="textWrapper">所有者: {{ item[1] }}</div>
                 </div>
-            </div> -->
-            {{ test }}
-            <div class="container" v-for="item in test">
-                {{ item }}
             </div>
-            <button v-on:click="sayHello()">ボタン</button>
         </div>
     </div>
 </template>
@@ -25,35 +20,29 @@ export default {
     name: 'top',
   data () {
     return {
-        test: {
-            itemName: null,
-            adress: null,
-            owner: null
-        },
+        names: []
     }
   },
-  methods: {
-      showInfo: (readindex) => {
-          contract.methods.getObject(readindex).call()
-          .then((value) => {
-              this.itemName = value[0];
-              this.adress = value[1];
-              this.owner = value[2];
-          });
-      },
-      sayHello: () => {
-          console.log(this.itemName);
-          console.log(this.adress);
-          console.log(this.owner);
-      },
-  },
   created: function() {
-      this.showInfo(1);
-      console.log(this.itemName);
-      console.log(this.adress);
-      console.log(this.owner);
+      this.$nextTick(() => {
+        contract.methods.getObject(0).call()
+        .then(value => {
+            this.names.push(value);
+        });
+        contract.methods.getObject(1).call()
+        .then(value => {
+            this.names.push(value);
+        });
+        contract.methods.getObject(2).call()
+        .then(value => {
+            this.names.push(value);
+        });
+        contract.methods.getObject(3).call()
+        .then(value => {
+            this.names.push(value);
+        });
+      });
   },
-
 }
 </script>
 
