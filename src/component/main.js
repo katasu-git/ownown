@@ -1,23 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>ownown</title>
-  </head>
-  <body>
-    <div id="app"></div>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"></script>
-
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#config-web-app -->
-
-<script>
-  
 if (typeof web3 !== 'undefined') {
 	web3js = new Web3(web3.currentProvider);
 } else {
@@ -171,22 +152,34 @@ const address = "0xd7a9100f326336e682c521a059b842ddf2f182b1";
 
 contract = new web3js.eth.Contract(abi, address);
 
+function registerInfo() {
+    // テキストボックスに入力されている情報を取得する
+    var objectname = document.getElementById("objectname").value;
+    var owenername = document.getElementById("owenername").value;
+    var index = document.getElementById("index").value;
 
+    // コントラクトの呼び出し
+    return contract.methods.setObject(index, objectname,owenername)
+    .send({ from: coinbase })
+    .on("receipt", function(receipt){
+        console.log("success");
+    })
+    .on("error", function(error){
+            console.log("error"); 
+    });
+}
 
+function showInfo() {
+    var readindex = document.getElementById("readindex").value;
+    // 表示されている情報を空にする
+    sl = document.getElementById('AccountInfo');
+    while(sl.lastChild) {
+        sl.removeChild(sl.lastChild);
+    }
 
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyAXFD3ED0oj3UNOSpB5S1WapP9OD7-h1UM",
-    authDomain: "ownown-48029.firebaseapp.com",
-    databaseURL: "https://ownown-48029.firebaseio.com",
-    projectId: "ownown-48029",
-    storageBucket: "ownown-48029.appspot.com",
-    messagingSenderId: "899422686997",
-    appId: "1:899422686997:web:6f9a332eab3bce2f"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-</script>
-    <script src="./build.js"></script>
-  </body>
-</html>
+    // 変数を取得する
+    contract.methods.getObject(readindex).call().then(console.log)
+
+    
+}
+export default { initpage }

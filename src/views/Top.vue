@@ -16,13 +16,15 @@
 </template>
 
 <script>
+// import web3js from "web3js"
+// import initpage from "../component/main.js"
 export default {
     name: 'top',
   data () {
     return {
         items: {
             name1: {
-                itemName: "キノコ",
+                itemName: this.showInfo(0),
                 adress: "dasmdklamsdklm",
                 ownerName: "マリオ"
             },
@@ -36,9 +38,22 @@ export default {
                 adress: "dl;samdas",
                 ownerName: "ハンター"
             },
-        }
+        },
+        components: {
+            // initpage,
+        },
+        
     }
-  }
+  },
+  methods: {
+      showInfo: function(readindex) {
+          return contract.methods.getObject(readindex).call();
+      }
+  },
+  created: function(){
+            console.log("hi" + JSON.stringify(this.showInfo(1)));
+}
+
 }
 </script>
 
