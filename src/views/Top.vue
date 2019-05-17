@@ -1,7 +1,7 @@
 <template>
     <div id="top">
         <div class="wrapper">
-            <div class="container" v-for="item in items">
+            <!-- <div class="container" v-for="item in items">
                 <div class="iconContainer">
                     <div class="iconBackground"></div>
                 </div>
@@ -10,49 +10,49 @@
                     <div class="textWrapper">アドレス: {{ item.adress }}</div>
                     <div class="textWrapper">所有者: {{ item.ownerName }}</div>
                 </div>
+            </div> -->
+            {{ test }}
+            <div class="container" v-for="item in test">
+                {{ item }}
             </div>
+            <button v-on:click="sayHello()">ボタン</button>
         </div>
     </div>
 </template>
 
 <script>
-// import web3js from "web3js"
-// import initpage from "../component/main.js"
 export default {
     name: 'top',
   data () {
     return {
-        items: {
-            name1: {
-                itemName: this.showInfo(0),
-                adress: "dasmdklamsdklm",
-                ownerName: "マリオ"
-            },
-            name2: {
-                itemName: "モンスターボール",
-                adress: "dmkasldl",
-                ownerName: "サトシ"
-            },
-            name3: {
-                itemName: "太刀",
-                adress: "dl;samdas",
-                ownerName: "ハンター"
-            },
+        test: {
+            itemName: null,
+            adress: null,
+            owner: null
         },
-        components: {
-            // initpage,
-        },
-        
     }
   },
   methods: {
-      showInfo: function(readindex) {
-          return contract.methods.getObject(readindex).call();
-      }
+      showInfo: (readindex) => {
+          contract.methods.getObject(readindex).call()
+          .then((value) => {
+              this.itemName = value[0];
+              this.adress = value[1];
+              this.owner = value[2];
+          });
+      },
+      sayHello: () => {
+          console.log(this.itemName);
+          console.log(this.adress);
+          console.log(this.owner);
+      },
   },
-  created: function(){
-            console.log("hi" + JSON.stringify(this.showInfo(1)));
-}
+  created: function() {
+      this.showInfo(1);
+      console.log(this.itemName);
+      console.log(this.adress);
+      console.log(this.owner);
+  },
 
 }
 </script>
