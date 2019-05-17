@@ -7,10 +7,11 @@
                 </div>
                 <div class="textContainer">
                     <div class="textWrapper">名前: {{ item[0] }}</div>
-                    <div class="textWrapper">アドレス: {{ item[2] }}</div>
+                    <div class="textWrapper adress">アドレス: {{ item[2] }}</div>
                     <div class="textWrapper">所有者: {{ item[1] }}</div>
                 </div>
             </div>
+            <router-link to="upload">アップロードページへ移動</router-link>
         </div>
     </div>
 </template>
@@ -90,6 +91,10 @@ export default {
     max-height: 150px;
     border: solid 0 #000000;
     border-radius: 100px;
+}
+
+.adress {
+    font-size: 8px;
 }
 
 </style>
